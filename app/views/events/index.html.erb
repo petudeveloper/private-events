@@ -11,4 +11,14 @@
             </tr>
         <% end %>
     </tbody>
+    <% if user_signed_in? %>
+        <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"button is-info" %>
+    <% end %>
+    <br>
+
+    <% unless user_signed_in? %>
+        <%= link_to "Log In/Sign Up", new_user_session_path, method: :get, class:"button is-info" %>
+    <% end %>
+    <br>
 </table>
+

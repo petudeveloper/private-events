@@ -1,0 +1,14 @@
+<h1 class="text-center text-danger my-5">Events</h1>
+
+<table class="d-flex justify-content-center align-items-center">
+    <tbody>
+            <% @events.each do |event| %>
+            <tr>
+                <td><strong class="text-primary"><%= event.title %></strong></td>
+            </tr>
+            <tr>
+                <td><small><%= event.location %></small></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

@@ -13,6 +13,7 @@
     </tbody>
 </table>
 <div class="text-center pt-5">
+    <%= link_to "Create New Event", new_event_path %><br>
     <% if user_signed_in? %>
         <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"button is-info" %>
     <% end %>

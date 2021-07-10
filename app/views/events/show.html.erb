@@ -3,14 +3,20 @@
 <%= form_with(model: @event) do |form| %>
     <div class="d-flex flex-column justify-content-center align-items-center">
         <div class="field py-2">
+            <strong>location:</strong> 
             <%= form.label @event.location %>
         </div>
         <div class="field py-2">
+            <strong>date: </strong> 
             <%= form.label @event.date %>
         </div>
         <div class="field py-2">
+            <strong>time: </strong> 
             <%= form.label @event.time %>
         </div>
-        
     </div>
 <% end %>
+
+<div class="text-center">
+    <%= link_to "Return tu all your events", events_path %><br>
+</div>

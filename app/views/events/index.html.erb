@@ -1,17 +1,24 @@
-<h1 class="text-center text-danger my-5">Events</h1>
+<% if user_signed_in? %>
+<div>
+    <h1 class="text-center text-danger my-5">Your Events</h1>
+    <table class="d-flex justify-content-center align-items-center">
+        <tbody>
+                <% current_user.events.each do |event| %>
+                <tr>
+                    <td><strong class="text-primary"><%= event.title %></strong></td>
+                </tr>
+                <tr>
+                    <td><small><%= event.location %></small></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+<% else %>
+    <h1 class="text-center text-danger my-5">Login to see your Events</h1>
+<% end %>
 
-<table class="d-flex justify-content-center align-items-center">
-    <tbody>
-            <% @events.each do |event| %>
-            <tr>
-                <td><strong class="text-primary"><%= event.title %></strong></td>
-            </tr>
-            <tr>
-                <td><small><%= event.location %></small></td>
-            </tr>
-        <% end %>
-    </tbody>
-</table>
+
 <div class="text-center pt-5">
     <%= link_to "Create New Event", new_event_path %><br>
     <% if user_signed_in? %>

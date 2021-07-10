@@ -1,0 +1,16 @@
+<h1 class="text-center text-danger my-5"><%= @event.title %></h1>
+
+<%= form_with(model: @event) do |form| %>
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <div class="field py-2">
+            <%= form.label @event.location %>
+        </div>
+        <div class="field py-2">
+            <%= form.label @event.date %>
+        </div>
+        <div class="field py-2">
+            <%= form.label @event.time %>
+        </div>
+        
+    </div>
+<% end %>

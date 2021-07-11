@@ -1,21 +1,27 @@
 <h1 class="text-center text-danger my-5"><%= @event.title %></h1>
 
-<%= form_with(model: @event) do |form| %>
-    <div class="d-flex flex-column justify-content-center align-items-center">
-        <div class="field py-2">
-            <strong>location:</strong> 
-            <%= form.label @event.location %>
-        </div>
-        <div class="field py-2">
-            <strong>date: </strong> 
-            <%= form.label @event.date %>
-        </div>
-        <div class="field py-2">
-            <strong>time: </strong> 
-            <%= form.label @event.time %>
-        </div>
+<div class="d-flex flex-column justify-content-center align-items-center">
+    <div class="field py-2">
+        <strong>Location:</strong> 
+        <%= @event.location %>
     </div>
-<% end %>
+    <div class="field py-2">
+        <strong>Date: </strong> 
+        <%=  @event.date %>
+    </div>
+    <div class="field py-2">
+        <strong>Time: </strong> 
+        <%=  @event.time %>
+    </div>
+    <div class="field py-2">
+        <ul class="attendees">
+            <strong>Atendees: </strong> 
+            <%=  @event.attendees.each do |attendee| %>
+                <li> <%= attendee.username %> </li>
+            <% end %>
+        </ul>
+    </div>
+</div>
 
 <div class="text-center">
     <%= link_to "Return tu all your events", events_path %><br>

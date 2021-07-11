@@ -1,18 +1,32 @@
 <% if user_signed_in? %>
 <div>
-    <h1 class="text-center text-danger my-5">Your Events</h1>
-    <table class="d-flex justify-content-center align-items-center">
-        <tbody>
-                <% current_user.events.each do |event| %>
-                <tr>
-                    <td><strong class="text-primary"><%= event.title %></strong></td>
-                </tr>
-                <tr>
-                    <td><small><%= event.location %></small></td>
-                </tr>
-            <% end %>
-        </tbody>
-    </table>
+    <h2 class="text-center text-danger my-5">Your Events</h2>
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <% current_user.events.each do |event| %>
+            <ul>
+                <p class="text-center"><strong class="text-primary"><%= event.title %></strong></p>
+                <p>
+                    <span><strong>Location: </strong></span>
+                    <small><%= event.location %></small>
+                </p>
+            </ul>
+            <p><%= link_to "Show event details", event %></p>
+        <% end %>
+    </div>
+</div>
+<div>
+    <h2 class="text-center text-danger my-5">Invitations</h2>
+
+    <div class="d-flex justify-content-center align-items-center">
+        <% current_user.attended_events.each do |event| %>
+            <ul><p class="text-center"><strong class="text-primary"><%= event.title %></strong></p>
+                <p>
+                    <span><strong>Location: </strong></span>
+                    <small><%= event.location %></small>
+                </p>
+            </ul>
+        <% end %>
+    </div>
 </div>
 <% else %>
     <h1 class="text-center text-danger my-5">Login to see your Events</h1>

@@ -16,7 +16,7 @@
     <div class="field py-2">
         <ul class="attendees">
             <strong>Atendees: </strong> 
-            <%=  @event.attendees.each do |attendee| %>
+            <%  @event.attendees.each do |attendee| %>
                 <li> <%= attendee.username %> </li>
             <% end %>
         </ul>

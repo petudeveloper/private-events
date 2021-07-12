@@ -17,21 +17,25 @@
 <div>
     <h2 class="text-center text-danger my-5">Invitations</h2>
 
-    <div class="d-flex justify-content-center align-items-center">
+    <div class="d-flex flex-column justify-content-center align-items-center">
         <h5>Upcoming Events</h5>
         <ul>
-        <% current_user.attended_events.where("date > ?", DateTime.current.midnight).find_each do |event| %>
+        <% current_user.attended_events.future_events.find_each do |event| %>
             <li><p class="text-center"><strong class="text-primary"><%= event.title %></strong></p>
                 <p>
                     <span><strong>Location: </strong></span>
                     <small><%= event.location %></small>
+                </p>
+                <p>
+                    <span><strong>Date: </strong></span>
+                    <small><%= event.date %></small>
                 </p>
             </li>
         <% end %>
         </ul>
         <h5>Past Events</h5>
         <ul>
-        <% current_user.attended_events.where("date < ?", DateTime.current.midnight).find_each do |event| %>
+        <% current_user.attended_events.past_events.find_each do |event| %>
             <li><p class="text-center"><strong class="text-primary"><%= event.title %></strong></p>
                 <p>
                     <span><strong>Location: </strong></span>

@@ -8,5 +8,8 @@ class UsersController < ApplicationController
     @created_events = @user.events
     @past_events = current_user.events.past_events
     @upcoming_events = current_user.events.future_events
+
+    @past_invitaions = current_user.attended_events.past_events
+    @future_invitations = current_user.attended_events.future_events
   end
 end

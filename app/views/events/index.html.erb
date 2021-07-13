@@ -4,20 +4,22 @@
     </div>
     <div class="mx-5">
         <% if user_signed_in? %>
+            <%= link_to "Your user", users_show_url %><br>
             <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"button is-info" %>
-        <% end %>
-        <% unless user_signed_in? %>
+        <% else user_signed_in? %>
             <%= link_to "Log In/Sign Up", new_user_session_path, method: :get, class:"button is-info" %>
         <% end %>
     </div>
 </nav>
 
+<h1 class="text-success text-center">Events</h1>
+
 <% if user_signed_in? %>
 <div id="container-past-events">
-    <h2 class="text-center text-danger mt-5">Past Events</h2>
+    <h3 class="text-center text-danger mt-5">Past Events</h3>
     <div class="d-flex flex-column justify-content-center align-items-center">
         <ul>
-            <% current_user.events.past_events.each do |event| %>
+            <% @past_events.each do |event| %>
                 <li>
                     <h4 class="text-center"><strong class="text-primary"><%= event.title %></strong></h4>
                     <div id="event-info">
@@ -31,10 +33,10 @@
     </div>
 </div>
 <div id="container-upcoming-events">
-    <h2 class="text-center text-danger mt-5">Upcoming Events</h2>
+    <h3 class="text-center text-danger mt-5">Upcoming Events</h3>
     <div class="d-flex flex-column justify-content-center align-items-center">
         <ul>
-            <% current_user.events.future_events.find_each do |event| %>
+            <% @upcoming_events.find_each do |event| %>
                 <li>
                     <h4 class="text-center"><strong class="text-primary"><%= event.title %></strong></h4>
                     <div id="event-info">
@@ -48,5 +50,5 @@
     </div>
 </div>
 <% else %>
-    <h1 class="text-center text-danger my-5">Login to see your Events</h1>
+    <h1 class="text-center text-danger my-5">Login to see Events</h1>
 <% end %>

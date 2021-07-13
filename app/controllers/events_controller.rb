@@ -4,6 +4,7 @@ class EventsController < ApplicationController
   def index
     @events = Event.all
     return unless user_signed_in?
+
     @past_events = current_user.events.past_events
     @upcoming_events = current_user.events.future_events
   end

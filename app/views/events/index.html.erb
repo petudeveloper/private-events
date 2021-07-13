@@ -1,65 +1,52 @@
-<% if user_signed_in? %>
-<div>
-    <h2 class="text-center text-danger my-5">Your Events</h2>
-    <div class="d-flex flex-column justify-content-center align-items-center">
-        <% current_user.events.each do |event| %>
-            <ul>
-                <p class="text-center"><strong class="text-primary"><%= event.title %></strong></p>
-                <p>
-                    <span><strong>Location: </strong></span>
-                    <small><%= event.location %></small>
-                </p>
-            </ul>
-            <p><%= link_to "Show event details", event %></p>
+<nav class="navbar navbar-dark bg-dark pt-5">
+    <div class="mx-5">
+        <%= link_to "Create New Event", new_event_path %><br>
+    </div>
+    <div class="mx-5">
+        <% if user_signed_in? %>
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"button is-info" %>
+        <% end %>
+        <% unless user_signed_in? %>
+            <%= link_to "Log In/Sign Up", new_user_session_path, method: :get, class:"button is-info" %>
         <% end %>
     </div>
-</div>
-<div>
-    <h2 class="text-center text-danger my-5">Invitations</h2>
+</nav>
 
+<% if user_signed_in? %>
+<div id="container-past-events">
+    <h2 class="text-center text-danger mt-5">Past Events</h2>
     <div class="d-flex flex-column justify-content-center align-items-center">
-        <h5>Upcoming Events</h5>
         <ul>
-        <% current_user.attended_events.future_events.find_each do |event| %>
-            <li><p class="text-center"><strong class="text-primary"><%= event.title %></strong></p>
-                <p>
-                    <span><strong>Location: </strong></span>
-                    <small><%= event.location %></small>
-                </p>
-                <p>
-                    <span><strong>Date: </strong></span>
-                    <small><%= event.date %></small>
-                </p>
-            </li>
-            <p><%= link_to "Show event details", event %></p>
-        <% end %>
+            <% current_user.events.past_events.each do |event| %>
+                <li>
+                    <h4 class="text-center"><strong class="text-primary"><%= event.title %></strong></h4>
+                    <div id="event-info">
+                        <span><strong>Location: </strong><%= event.location %></span><br>
+                        <span><strong>Date: </strong><%= event.date %></span>
+                    </div>
+                    <p><%= link_to "Show event details", event %></p>
+                </li>
+            <% end %>
         </ul>
-        <h5>Past Events</h5>
+    </div>
+</div>
+<div id="container-upcoming-events">
+    <h2 class="text-center text-danger mt-5">Upcoming Events</h2>
+    <div class="d-flex flex-column justify-content-center align-items-center">
         <ul>
-        <% current_user.attended_events.past_events.find_each do |event| %>
-            <li><p class="text-center"><strong class="text-primary"><%= event.title %></strong></p>
-                <p>
-                    <span><strong>Location: </strong></span>
-                    <small><%= event.location %></small>
-                </p>
-            </li>
-        <% end %>
+            <% current_user.events.future_events.find_each do |event| %>
+                <li>
+                    <h4 class="text-center"><strong class="text-primary"><%= event.title %></strong></h4>
+                    <div id="event-info">
+                        <span><strong>Location: </strong><%= event.location %></span><br>
+                        <span><strong>Date: </strong><%= event.date %></span>
+                    </div>
+                </li>
+                <p><%= link_to "Show event details", event %></p>
+            <% end %>
         </ul>
     </div>
 </div>
 <% else %>
     <h1 class="text-center text-danger my-5">Login to see your Events</h1>
 <% end %>
-
-
-<div class="text-center pt-5">
-    <%= link_to "Create New Event", new_event_path %><br>
-    <% if user_signed_in? %>
-        <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"button is-info" %>
-    <% end %>
-    <br>
-    <% unless user_signed_in? %>
-        <%= link_to "Log In/Sign Up", new_user_session_path, method: :get, class:"button is-info" %>
-    <% end %>
-    <br>
-</div>

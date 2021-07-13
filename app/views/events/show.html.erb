@@ -1,3 +1,9 @@
+<nav class="navbar navbar-dark bg-dark pt-5 d-flex justify-content-end">
+    <div class="mx-5">
+        <%= link_to "Return to all your events", events_path %>
+    </div>
+</nav>
+
 <h1 class="text-center text-danger my-5"><%= @event.title %></h1>
 
 <div class="d-flex flex-column justify-content-center align-items-center">
@@ -21,8 +27,4 @@
             <% end %>
         </ul>
     </div>
-</div>
-
-<div class="text-center">
-    <%= link_to "Return to all your events", events_path %><br>
 </div>

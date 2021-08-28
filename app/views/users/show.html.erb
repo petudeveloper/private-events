@@ -1,0 +1,96 @@
+<nav class="navbar navbar-dark bg-dark pt-5">
+    <div class="mx-5">
+        <%= link_to "Create New Event", new_event_path %><br>
+    </div>
+    <div class="mx-5">
+        <% if user_signed_in? %>
+            <%= link_to "Return to all events", events_path %><br>
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"button is-info" %>
+        <% end %>
+        <% unless user_signed_in? %>
+            <%= link_to "Log In/Sign Up", new_user_session_path, method: :get, class:"button is-info" %>
+        <% end %>
+    </div>
+</nav>
+
+<% if user_signed_in? %>
+<div class="d-flex">
+    <div id="events-container" class="w-100">
+        <h2 class="text-success text-center">EVENTS</h2>
+        <div id="container-past-events">
+            <h3 class="text-center text-danger mt-5">Past Events</h3>
+            <div class="d-flex flex-column justify-content-center align-items-center">
+                <ul>
+                    <% @past_events.each do |event| %>
+                        <li>
+                            <h4 class="text-center"><strong class="text-primary"><%= event.title %></strong></h4>
+                            <div id="event-info">
+                                <span><strong>Location: </strong><%= event.location %></span><br>
+                                <span><strong>Date: </strong><%= event.date %></span>
+                            </div>
+                            <p><%= link_to "Show event details", event %></p>
+                        </li>
+                    <% end %>
+                </ul>
+            </div>
+        </div>
+        <div id="container-upcoming-events">
+            <h3 class="text-center text-danger mt-5">Upcoming Events</h3>
+            <div class="d-flex flex-column justify-content-center align-items-center">
+                <ul>
+                    <% @upcoming_events.each do |event| %>
+                        <li>
+                            <h4 class="text-center"><strong class="text-primary"><%= event.title %></strong></h4>
+                            <div id="event-info">
+                                <span><strong>Location: </strong><%= event.location %></span><br>
+                                <span><strong>Date: </strong><%= event.date %></span>
+                            </div>
+                        </li>
+                        <p><%= link_to "Show event details", event %></p>
+                    <% end %>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="invitations-container" class="w-100">
+        <h2 class="text-success text-center">INVITATIONS</h2>
+
+        <div id="container-past-invitations">
+            <h3 class="text-center text-danger mt-5">Past Invitations</h3>
+            <div class="d-flex flex-column justify-content-center align-items-center">
+                <ul>
+                    <% @past_invitaions.each do |event| %>
+                        <li>
+                            <h4 class="text-center"><strong class="text-primary"><%= event.title %></strong></h4>
+                            <div id="event-info">
+                                <span><strong>Location: </strong><%= event.location %></span><br>
+                                <span><strong>Date: </strong><%= event.date %></span>
+                            </div>
+                            <p><%= link_to "Show event details", event %></p>
+                        </li>
+                    <% end %>
+                </ul>
+            </div>
+        </div>
+        <div id="container-upcoming-events">
+            <h3 class="text-center text-danger mt-5">Upcoming Events</h3>
+            <div class="d-flex flex-column justify-content-center align-items-center">
+                <ul>
+                    <% @future_invitations.each do |event| %>
+                        <li>
+                            <h4 class="text-center"><strong class="text-primary"><%= event.title %></strong></h4>
+                            <div id="event-info">
+                                <span><strong>Location: </strong><%= event.location %></span><br>
+                                <span><strong>Date: </strong><%= event.date %></span>
+                            </div>
+                        </li>
+                        <p><%= link_to "Show event details", event %></p>
+                    <% end %>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<% else %>
+    <h1 class="text-center text-danger my-5">Login to see your Events</h1>
+<% end %>

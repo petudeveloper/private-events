@@ -1,0 +1,54 @@
+<nav class="navbar navbar-dark bg-dark pt-5">
+    <div class="mx-5">
+        <%= link_to "Create New Event", new_event_path %><br>
+    </div>
+    <div class="mx-5">
+        <% if user_signed_in? %>
+            <%= link_to "Your user", users_show_url %><br>
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"button is-info" %>
+        <% else user_signed_in? %>
+            <%= link_to "Log In/Sign Up", new_user_session_path, method: :get, class:"button is-info" %>
+        <% end %>
+    </div>
+</nav>
+
+<h1 class="text-success text-center">Events</h1>
+
+<% if user_signed_in? %>
+<div id="container-past-events">
+    <h3 class="text-center text-danger mt-5">Past Events</h3>
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <ul>
+            <% @past_events.each do |event| %>
+                <li>
+                    <h4 class="text-center"><strong class="text-primary"><%= event.title %></strong></h4>
+                    <div id="event-info">
+                        <span><strong>Location: </strong><%= event.location %></span><br>
+                        <span><strong>Date: </strong><%= event.date %></span>
+                    </div>
+                    <p><%= link_to "Show event details", event %></p>
+                </li>
+            <% end %>
+        </ul>
+    </div>
+</div>
+<div id="container-upcoming-events">
+    <h3 class="text-center text-danger mt-5">Upcoming Events</h3>
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <ul>
+            <% @upcoming_events.find_each do |event| %>
+                <li>
+                    <h4 class="text-center"><strong class="text-primary"><%= event.title %></strong></h4>
+                    <div id="event-info">
+                        <span><strong>Location: </strong><%= event.location %></span><br>
+                        <span><strong>Date: </strong><%= event.date %></span>
+                    </div>
+                </li>
+                <p><%= link_to "Show event details", event %></p>
+            <% end %>
+        </ul>
+    </div>
+</div>
+<% else %>
+    <h1 class="text-center text-danger my-5">Login to see Events</h1>
+<% end %>

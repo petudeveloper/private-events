@@ -1,0 +1,30 @@
+<nav class="navbar navbar-dark bg-dark pt-5 d-flex justify-content-end">
+    <div class="mx-5">
+        <%= link_to "Return to all events", events_path %>
+    </div>
+</nav>
+
+<h1 class="text-center text-danger my-5"><%= @event.title %></h1>
+
+<div class="d-flex flex-column justify-content-center align-items-center">
+    <div class="field py-2">
+        <strong>Location:</strong> 
+        <%= @event.location %>
+    </div>
+    <div class="field py-2">
+        <strong>Date: </strong> 
+        <%=  @event.date %>
+    </div>
+    <div class="field py-2">
+        <strong>Time: </strong> 
+        <%=  @event.time %>
+    </div>
+    <div class="field py-2">
+        <ul class="attendees">
+            <strong>Atendees: </strong> 
+            <%  @event.attendees.each do |attendee| %>
+                <li> <%= attendee.username %> </li>
+            <% end %>
+        </ul>
+    </div>
+</div>

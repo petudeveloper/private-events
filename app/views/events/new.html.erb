@@ -1,0 +1,43 @@
+<nav class="navbar navbar-dark bg-dark pt-5 d-flex justify-content-end">
+    <div class="mx-5">
+        <%= link_to "Return to all your events", events_path %>
+    </div>
+</nav>
+
+<h1 class="text-center text-danger my-5">New Event</h1>
+
+<%= form_with(model: @event) do |form| %>
+    <% if @event.errors.any? %>
+        <div id="error_explanation">
+        <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+        <ul>
+            <% @event.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+            <% end %>
+        </ul>
+        </div>
+    <% end %>
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <div class="field py-2">
+            <%= form.label :title %>
+            <%= form.text_field :title %>
+        </div>
+        <div class="field py-2">
+            <%= form.label :location %>
+            <%= form.text_field :location %>
+        </div>
+        <div class="field py-2">
+            <%= form.label :date %>
+            <%= form.date_field :date %>
+        </div>
+        <div class="field py-2">
+            <%= form.label :time %>
+            <%= form.time_field :time %>
+        </div>
+
+        <div class="actions py-2">
+            <%= form.submit %>
+        </div>
+    </div>
+<% end %>
